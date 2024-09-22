@@ -20,10 +20,24 @@ app.get('/produtos/:id', (req, res) =>{
 
 app.post('/produtos', (req, res) => {
     const produto = bancoDeDados.salvarProduto({
+        
         name: req.body.name,
         preco: req.body.preco
     })
     res.send(produto)
+})
+
+app.put('/produtos/:id', (req, res) => {
+    const produto = bancoDeDados.salvarProduto({
+        id: req.params.id,
+        name: req.body.name,
+        preco: req.body.preco
+    })
+    res.send(produto)
+})
+
+app.delete('/produtos/:id', (req, res) => {
+    
 })
 
 app.listen(porta, ()=>{
