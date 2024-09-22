@@ -10,14 +10,16 @@ const bodyParser = require('body-parser')
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+// Retornar uma lista de todos os produtos disponíveis no BD.
 app.get('/produtos', (req, res) =>{
     res.send(bancoDeDados.getProdutos())
 })
-
+// mostrar produtos específico por ID
 app.get('/produtos/:id', (req, res) =>{
     res.send(bancoDeDados.getProduto(req.params.id))
 })
-
+// postar produto
 app.post('/produtos', (req, res) => {
     const produto = bancoDeDados.salvarProduto({
         
@@ -26,7 +28,7 @@ app.post('/produtos', (req, res) => {
     })
     res.send(produto)
 })
-
+// modificar produto por ID
 app.put('/produtos/:id', (req, res) => {
     const produto = bancoDeDados.salvarProduto({
         id: req.params.id,
@@ -35,9 +37,15 @@ app.put('/produtos/:id', (req, res) => {
     })
     res.send(produto)
 })
-
+// deletar produto por ID
 app.delete('/produtos/:id', (req, res) => {
-    
+    const produto = bancoDeDados.excluirProduto(req.params.id)
+    if(produto){
+        res.send({message: 'Produto deletado', produto})
+    } else{
+        res.send({message: 'produto não encontrado'})
+    }
+   
 })
 
 app.listen(porta, ()=>{
