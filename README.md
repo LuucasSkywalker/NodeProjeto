@@ -1,2 +1,4 @@
 
-Projeto crud usando node.express e utilizando postman no HTTP
+### TESTE CRUD em express no nodejs. Utilizando postman no HTTP 
+
+![fluxoprojeto](img/fluxonode.png)
